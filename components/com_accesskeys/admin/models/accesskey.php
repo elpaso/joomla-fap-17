@@ -1,7 +1,7 @@
 <?php
 /**
-* This file is part oj Joomla! 1.5 FAP
-* @version      $Id: default.php 113 2010-05-31 15:40:33Z elpaso $
+* This file is part of Joomla! 1.5 FAP
+* @version      $Id: helper.php 9877 2008-01-05 12:37:25Z mtk $
 * @package      JoomlaFAP
 * @copyright    Copyright (C) 2008 Alessandro Pasotti http://www.itopen.it
 * @license      GNU/AGPL
@@ -21,11 +21,11 @@
 
 */
 
-// no direct access
-defined('_JEXEC') or die('Restricted access');
-if(JComponentHelper::isEnabled('com_accesskeys', true)){
-    include dirname(__FILE__).DS.'accesskey_helper.php';
-} else {
-    // Include original file
-    include JPATH_SITE.DS.'modules'.DS.'mod_mainmenu'.DS.'tmpl'.DS.'default.php';
+// Impedisce l'accesso diretto al file
+defined('_JEXEC') or die();
+
+// Include la classe base JModel
+jimport('joomla.application.component.modelitem');
+
+class AccesskeysModelAccesskey extends JModelItem {
 }
