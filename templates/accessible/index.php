@@ -1,9 +1,8 @@
 <?php
 /**
 * This file is part of
-* Joomla! 1.5 FAP
+* Joomla! 1.7 FAP
 * @package   JoomlaFAP
-* @version   $Id: index.php 90 2009-05-26 17:29:05Z elpaso $
 * @author    Alessandro Pasotti
 * @copyright    Copyright (C) 2011 Alessandro Pasotti http://www.itopen.it
 * @license      GNU/AGPL
@@ -76,7 +75,7 @@ if($this->countModules('left or inset or user4')) {
     <div id="wrapper">
         <?php if ($this->countModules('breadcrumb')) { ?>
         <div id="pathway">
-            <div class="padding"><?php echo JText::_('You are here'); ?>
+            <div class="padding">
             <jdoc:include type="modules" name="breadcrumb" />
             </div>
         </div>
@@ -175,6 +174,10 @@ if($this->countModules('left or inset or user4')) {
             <a name="main-content" class="hidden"></a>
             <div class="padding">
             <jdoc:include type="message" />
+            <?php if ($this->countModules('top') && JRequest::getCmd('task') != 'edit') { ?>
+            <jdoc:include type="modules" name="top" style="xhtml" />
+            <div class="clr"></div>
+            <?php } ?>
             <jdoc:include type="component" style="xhtml"/>
             <div id="user12">
                 <?php if ($this->countModules('user1 or user2') && ! $this->countModules('user1 and user2')) { ?>

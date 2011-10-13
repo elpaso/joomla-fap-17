@@ -5,12 +5,26 @@ body {
     line-height: 1.4;
 }
 
+dt, dd {
+    padding: 0; margin:0;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 2em;
+}
+
 address,blockquote,form,ul,ol,dl,fieldset,blockquote,label{
     margin: 0.3em 0.3em 0.3em 0;
 }
 
 div.maincomponent fieldset div {
     padding: 0.5em 1em;
+}
+
+div.maincomponent fieldset button {
+    margin-left: 1em;
+    cursor: pointer;
 }
 
 #editor-xtd-buttons div, div.maincomponent .mceEditor div {
@@ -60,16 +74,45 @@ label.block {
 }
 
 .menu a
-, .mostread a
-, .latestnews a{
+{
     display: block;
     text-decoration:none;
     padding:0.5em 0 0.5em 0.5em;
     margin: 1px 0;
     font-size: 110%;
     font-weight: bolder;
-    border-bottom: dotted 1px gray;
 }
+
+.moduletable ul.menu li ul {
+    margin-right: 0;
+}
+
+.menu li li a {
+    padding-left: 1em;
+    font-weight: normal;
+}
+
+
+.menu li li li a {
+    padding-left: 2em;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.menu li li li li a {
+    padding-left: 3em;
+    font-weight: normal;
+    font-size: 100%;
+}
+
+
+.menu li li li li li a {
+    padding-left: 4em;
+    font-weight: normal;
+    font-size: 100%;
+    font-style: normal;
+}
+
 
 a.contentpagetitle {
 	text-decoration: none;
@@ -80,9 +123,7 @@ a.contentpagetitle {
 
 div#footer{
 	clear:both;
-	height:46px;
 	margin-top:3px;
-	padding:5px 0pt;
 	text-align:center;
 }
 
@@ -91,8 +132,8 @@ div#footer .padding{
     margin-top: 2em;
 }
 
-div#footer div.moduletable-footer{
-    text-align: center;
+div#footer div.moduletable{
+    margin-bottom:0;
 }
 
 h1 {
@@ -127,7 +168,7 @@ div.blog_more {
     clear: both;
 }
 
-.blog_more li, .latestnews li, .mostread li{
+.blog_more li {
     list-style-type: none;
 }
 
@@ -223,8 +264,7 @@ div.contentpaneopen ul, div.contentpaneopen ul {
 }
 
 ul.menu
-, ul.mostread
-, ul.latestnews {
+ {
 	padding: 0;
 	margin:0;
 }
@@ -288,7 +328,7 @@ div.buttonheading {
 	margin-bottom: 1em;
 }
 
-a.readon {
+.readmore a {
 	padding: 0.3em;
 	padding-left: 0;
 }
@@ -310,7 +350,6 @@ div.poll div {
 
 fieldset {
 	padding: 1em;
-	border: solid 2px gray;
 }
 
 legend {
@@ -323,7 +362,7 @@ a img {
 	border: none;
 }
 
-/* Content tables */
+/* Content tables TODO: needed ? */
 .contentpane table td
 ,.contentpane table th
 {
@@ -346,12 +385,27 @@ span.description {
 }
 
 /* Page navigation */
-div.pagenav {
-	margin-top: 1em;
-	margin-bottom: 0.5em;
-	padding: 0.75em;
+div.pagination
+, ul.pagenav  {
 	font-weight: bold;
 	text-align: center;
+    margin-bottom: 1em;
+}
+
+ul.pagenav {
+    padding: 1em;
+    margin: 1em 0;
+}
+
+div.pagination ul
+, ul.pagenav {
+    list-style-type: none;
+}
+
+div.pagination ul li
+, ul.pagenav li{
+    display: inline;
+    padding: 0 0.4em;
 }
 
 /* The ugly fix */
@@ -363,4 +417,159 @@ hr.clear {
     clear:both;
     height: 0;
     visibility:hidden;
+}
+
+/* from 1.7 */
+table.weblinks, table.category {
+    font-size: 1em;
+}
+
+table.weblinks th, table.category th {
+    padding: 7px;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+#main .cat-children ul {
+    margin: 20px 20px 20px 0;
+    list-style-type: none;
+    padding: 0;
+}
+
+#main .categories-list ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#main .categories-list ul ul {
+    margin-left: 1em;
+}
+
+#main .categories-list dl dt, #main .categories-list dl dd {
+    display: inline;
+}
+
+#main .cat-children ul li {
+    clear: both;
+}
+
+#main .item-title {
+    font-weight: bold;
+}
+
+.image-left {
+    float: left;
+    margin: 0 15px 5px 0;
+}
+
+.image-right
+{
+    float:right;
+    margin:0 0 5px 15px
+}
+
+#main ul.actions li {
+    display: inline;
+}
+
+#main ul.actions li a {
+    border-bottom: none;
+}
+
+#main ul.actions {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    width: 100%;
+}
+
+.article-info {
+    font-size: 0.9em;
+    margin: 1em 0 1em 0;
+}
+
+.article-info-term {
+    display: none;
+}
+
+
+.login-fields label {
+    float: left;
+    width: 9em;
+}
+
+/* mod stats  */
+
+
+dl.stats-module {
+    margin:1em 0 1em 1em;
+}
+
+.stats-module dt {
+    float:left;
+    margin:0 1em 0 0;
+    font-weight: bold;
+}
+
+.stats-module dt
+, .stats-module dd {
+    padding:0.2em 0;
+}
+
+/* syndicate */
+
+a.feed-link
+{
+margin-top:15px;
+display:block;
+text-decoration:none
+}
+
+.feed-link img
+{border:0}
+
+#users-profile-core dt, #users-profile-custom dt {
+    float: left;
+    padding: 3px 0;
+    width: 12em;
+}
+#users-profile-core dd, #users-profile-custom dd {
+    padding: 3px 0;
+}
+
+#main .cat-children ul ul {
+    margin: 2em;
+}
+
+
+#main .cat-children ul li {
+    margin: 1em 0;
+}
+
+
+.panel h3.pane-toggler a
+{
+    background-image:url(../images/slider_plus.png);
+    background-position: right  top;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.panel h3.pane-toggler-down a {
+    background-image: url("../images/slider_minus.png");
+    background-position: right  top;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+
+.panel h3 a {
+    display: block;
+    padding: 6px;
+    text-decoration: none;
 }

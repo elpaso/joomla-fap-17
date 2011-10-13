@@ -46,11 +46,11 @@ body.black a {
     color: yellow;
 }
 
-body.black a.readon {
+body.black .readmore a {
     font-weight: bold;
 }
 
-body.black a.readon:hover {
+body.black .readmore a:hover {
     color: black;
     background: yellow;
 }
@@ -92,3 +92,23 @@ body.black #system-message dd.error ul { color: yellow; background: gray ; borde
 body.black #system-message dt.notice { display: none; }
 body.black #system-message dd.notice {  }
 body.black #system-message dd.notice ul { color: yellow; background: gray; border-top: 3px solid yellow; border-bottom: 3px solid yellow;}
+
+
+/* Since 1.7 */
+
+body.white .star {
+    color: #CC0000;
+}
+
+
+body.black .panel h3.pane-toggler a
+{
+    background:#555555 url(../images/slider_plus.png) right top no-repeat;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+body.black .panel h3.pane-toggler-down a {
+    background:#555555 url(../images/slider_minus.png) right top no-repeat;
+    border-bottom: 1px solid #DDDDDD;
+}
+

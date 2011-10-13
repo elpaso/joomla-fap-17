@@ -2,7 +2,7 @@
 <install type="component" version="1.6.0" method="upgrade">
     <name>AccessKeys</name>
     <creationDate>2011-07-27</creationDate>
-    <author>Alessandro Pasotti</author>
+    <author>Alessandro Pasotti - ItOpen</author>
     <authorUrl>http://www.itopen.it</authorUrl>
     <copyright>Copyright 2008 ItOpen</copyright>
     <license>GNU/AGPL</license>
@@ -37,7 +37,6 @@
     </languages>
 
     <media destination="com_accesskeys" folder="media">
-        <filename>index.html</filename>
         <folder>images</folder>
     </media>
 
