@@ -43,8 +43,7 @@
             </fieldset>
         </fields>
     </config>
-	<languages>
-		<language tag="en-GB">en-GB.tpl_accessible.ini</language>
+	<languages folder="language">
         <language tag="it-IT">it-IT.tpl_accessible.ini</language>
 	</languages>
 

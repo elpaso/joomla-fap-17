@@ -65,11 +65,11 @@ body.black .button {
 	color: black;
 }
 
-body.black div#accessibility-links  span.accessibility-icon input,
+body.black div#accessibility-links  span.accessibility-icon button,
 body.black div#accessibility-links  span.accessibility-icon {
     background-color: black;
 }
-body.black div#accessibility-links  span.accessibility-icon input:hover {
+body.black div#accessibility-links  span.accessibility-icon button:hover {
     background-color: gray;
 }
 

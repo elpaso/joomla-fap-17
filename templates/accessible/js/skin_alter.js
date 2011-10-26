@@ -2,18 +2,24 @@
 * Accessibility
 *
 * This file is part of
-* Joomla! 1.5 FAP
+* Joomla! 1.7 FAP
 * @copyright 2011 ItOpen http://www.itopen.it
 * @author    Alessandro Pasotti
 * @licence   GNU/AGPL v. 3
 *
 */
 
-var fs_default   = 80;
+var fs_default   = fs_default || 80;
 var prefs_loaded = false;
 var fs_current   = fs_default;
 var skin_current = skin_default;
 
+function handle_keypress(action){
+    if(event.keyCode && event.keyCode != 9){
+        action();
+    }
+    return false;
+}
 
 function prefs_load(){
     if(!prefs_loaded){
@@ -28,11 +34,13 @@ function prefs_load(){
 
         prefs_loaded = true;
     }
+    return false;
 }
 
 function prefs_save(){
-        Cookie.write('joomla_fs', fs_current, {duration: 365, path : '/'})
-        Cookie.write('joomla_skin', skin_current, {duration: 365, path : '/'})
+    Cookie.write('joomla_fs', fs_current, {duration: 365, path : '/'})
+    Cookie.write('joomla_skin', skin_current, {duration: 365, path : '/'})
+    return false;
 }
 
 function fs_change(diff){
@@ -43,6 +51,7 @@ function fs_change(diff){
         fs_current = 70;
     }
     fs_set(fs_current);
+    return false;
 }
 
 function skin_change(skin){
@@ -69,7 +78,8 @@ function skin_change(skin){
     }
     skin_current = skin;
     skin_set(skin);
-    prefs_save()
+    prefs_save();
+    return false;
 }
 
 
@@ -85,16 +95,19 @@ function skin_set_variant(variant){
     //console.log('skin_set_variant variant :' + variant)
     skin_current = skin;
     skin_change(skin);
+    return false;
 }
 
 
 function fs_set(fs){
     fs_current = fs;
     $$('body').setStyle('font-size', fs + '%');
+    return false;
 }
 
 function skin_set(skin){
     $$('body').setProperty('class', skin);
+    return false;
 }
 
 window.addEvent('domready', prefs_load);

@@ -41,6 +41,56 @@ if ($this->countModules('right')
 if($this->countModules('left or inset or user4')) {
 	$cols += 1;
 }
+
+/* Accessibility session storage */
+$session = JFactory::getSession();
+
+if($fap_skin_request = JRequest::getVar('fap_skin')){
+    $fap_skin_current = $session->get('fap_skin_current');
+    if(!$fap_skin_current){
+        $fap_skin_current = $this->params->get('default_skin');
+    }
+    switch($fap_skin_request) {
+        case 'reset':
+            $fap_skin_current = $this->params->get('default_skin');
+            $session->set('fap_font_size', 80);
+        break;
+        case 'liquid':
+            if(strpos($fap_skin_current, ' liquid') !== false){
+                $fap_skin_current = preg_replace('# liquid#', '', $fap_skin_current);
+            } else {
+                $fap_skin_current .= ' liquid';
+            }
+        break;
+        case 'contrasthigh':
+            if(strpos($fap_skin_current, 'white') !== false){
+                $fap_skin_current = str_replace('white', 'black', $fap_skin_current);
+            } else {
+                $fap_skin_current = str_replace('black', 'white', $fap_skin_current);
+            }
+        break;
+    }
+    $session->set('fap_skin_current', $fap_skin_current);
+}
+
+
+if($fap_font_size_request = JRequest::getVar('fap_font_size')){
+    $font_size = $session->get('fap_font_size');
+    if(!$font_size){
+        $font_size = 80;
+    }
+    if('increase' == $fap_font_size_request){
+        $font_size += 5;
+    } else {
+        $font_size -= 5;
+    }
+    $font_size = max($font_size, 70);
+    $font_size = min($font_size, 100);
+    $session->set('fap_font_size', $font_size);
+}
+
+
+
 ?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -58,18 +108,31 @@ if($this->countModules('left or inset or user4')) {
 <script type="text/javascript">
 /* <![CDATA[ */
     var skin_default = '<?php echo $this->params->get('default_skin'); ?>';
+    <?php if($fap_skin_current = $session->get('fap_skin_current')){ ?>
+    var skin_current = <?php echo $fap_skin_current; ?>;
+    <?php } ?>
+    // To validator...
+
 /* ]]> */
 </script>
+<?php // set font_size & skin from session
+if($fap_font_size = $session->get('fap_font_size')){ ?>
+<style type="text/css">
+    body#main {
+        font-size: <?php echo $fap_font_size ?>%;
+    }
+</style>
+<?php } ?>
 <script type="text/javascript" src="<?php echo JURI::base();?>templates/<?php echo $this->template;?>/js/skin_alter.js"></script>
 </head>
-<body class="<?php echo $this->params->get('default_skin'); ?>" id="main">
+<body class="<?php echo ($fap_skin_current ? $fap_skin_current : $this->params->get('default_skin')); ?>" id="main">
 	<div class="hidden">
 		<a name="up" id="up"></a>
 		<h1><?php echo $this->description; ?></h1>
 		<!-- accesskey goes here! -->
 		<ul>
-			<li><a accesskey="P" href="#main-content"><?php echo JText::_('Skip to Content'); ?></a></li>
-			<li><a accesskey="M" href="#main-menu"><?php echo JText::_('Jump to Main Navigation and Login'); ?></a></li>
+			<li><a accesskey="P" href="#main-content"><?php echo JText::_('FAP_SKIP_TO_CONTENT'); ?></a></li>
+			<li><a accesskey="M" href="#main-menu"><?php echo JText::_('FAP_JUMP_TO_MAIN_NAVIGATION_AND_LOGIN'); ?></a></li>
 		</ul>
 	</div>
     <div id="wrapper">
@@ -85,38 +148,37 @@ if($this->countModules('left or inset or user4')) {
           <div class="padding">
             <?php if('no' == $this->params->get('accessibility_icons')) { ?>
             <div id="accessibility-links">
-				<script type="text/javascript">
-                    //<![CDATA[
-                        document.write('<?php echo JText::_('FONTSIZE'); ?>:');
-                        document.write('<input type="button" name="decrease" id="decrease" value=" A - " accesskey="D" onclick="fs_change(-1); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){fs_change(-1); return false;}" title="<?php echo JText::_('Decrease size'); ?> [D]" />');
-                        document.write('<input type="button" name="increase" id="increase" value=" A + " accesskey="A" onclick="fs_change(1); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){fs_change(1); return false;}" title="<?php echo JText::_('Increase size'); ?> [A]" />');
-                        document.write('<input type="button" name="contrasthigh" id="contrasthigh" value="<?php echo JText::_('contrast'); ?>" accesskey="X" onclick="skin_change(\'swap\');return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_change(\'swap\'); return false;}" title="<?php echo JText::_('High contrast'); ?> [X]" />');
+                <form id="fap_skin" method="post" action="">
+                    <div>
+                        <?php echo JText::_('FAP_FONTSIZE'); ?>
+                        <button type="button" name="fap_font_size" value="decrease" id="decrease" value=" A - " accesskey="D" onclick="fs_change(-1); return false;" onkeypress="return handle_keypress(function(){fs_change(-1);});" title="<?php echo JText::_('FAP_DECREASE_SIZE'); ?> [D]"><?php echo JText::_('FAP_SMALLER'); ?></button>
+                        <button type="button"  name="fap_font_size" value="increase" id="increase" value=" A + " accesskey="A" onclick="fs_change(1); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){fs_change(1); return false;}" title="<?php echo JText::_('FAP_INCREASE_SIZE'); ?> [A]"><?php echo JText::_('FAP_BIGGER'); ?></button>
+                        <button type="button" name="contrasthigh" id="contrasthigh" value="<?php echo JText::_('FAP_CONTRAST'); ?>" accesskey="X" onclick="skin_change('swap');return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_change('swap'); return false;}" title="<?php echo JText::_('FAP_HIGH_CONTRAST'); ?> [X]"><?php echo JText::_('FAP_CONTRAST'); ?></button>
                         <?php if('yes' == $this->params->get('liquid_variant')) { ?>
-                        document.write('<input type="button" name="liquid" id="liquid" value="<?php echo JText::_('LAYOUT'); ?>" accesskey="L" onclick="skin_set_variant(\'liquid\'); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_set_variant(\'liquid\'); return false;}" title="<?php echo JText::_('SET VARIABLE WIDTH'); ?> [L]" />');
+                        <button type="button" name="liquid" id="liquid" value="<?php echo JText::_('FAP_LAYOUT'); ?>" accesskey="L" onclick="skin_set_variant('liquid'); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_set_variant('liquid'); return false;}" title="<?php echo JText::_('FAP_SET_VARIABLE_WIDTH'); ?> [L]"><?php echo JText::_('FAP_VARIABLE_WIDTH'); ?></button>
                         <?php } ?>
-                        document.write('<input type="button" name="reset" id="reset" value="<?php echo JText::_('reset'); ?>" accesskey="Z" onclick="skin_change(\'<?php echo $this->params->get('default_skin'); ?>\'); skin_set_variant(\'\'); fs_set(fs_default); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_change(\'<?php echo $this->params->get('default_skin'); ?>\'); skin_set_variant(\'\'); fs_set(fs_default);return false;}" title="<?php echo JText::_('Revert styles to default'); ?> [Z]" />');
-                    //]]>
-				</script>
-				<noscript><h2><?php echo JText::_('NOSCRIPT'); ?></h2></noscript>
+                        <button type="button" name="reset" id="reset" value="<?php echo JText::_('FAP_RESET'); ?>" accesskey="Z" onclick="skin_change('<?php echo $this->params->get('default_skin'); ?>'); skin_set_variant(''); fs_set(fs_default); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_change('<?php echo $this->params->get('default_skin'); ?>'); skin_set_variant(''); fs_set(fs_default);return false;}" title="<?php echo JText::_('FAP_REVERT_STYLES_TO_DEFAULT'); ?> [Z]"><?php echo JText::_('FAP_RESET'); ?></button>
+                    </div>
+                </form>
+
             </div>
             <?php } else { ?>
             <div id="accessibility-links" class="accessibility-icons">
-              <script type="text/javascript">
-                //<![CDATA[
-                      document.write('<span class="accessibility-text"><?php echo JText::_('FONTSIZE'); ?></span>');
-                      document.write('<span class="accessibility-icon"><input type="button" name="decrease" id="decrease" accesskey="D" onclick="fs_change(-1); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){fs_change(-1); return false;}" title="<?php echo JText::_('Decrease size'); ?> [D]" /></span>');
-                      document.write('<span class="accessibility-icon"><input type="button" name="increase" id="increase" accesskey="A" onclick="fs_change(1); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){fs_change(1); return false;}" title="<?php echo JText::_('Increase size'); ?> [A]" /></span>');
-                      document.write('<span class="accessibility-text"><?php echo JText::_('contrast'); ?></span>');
-                      document.write('<span class="accessibility-icon"><input type="button" name="contrasthigh" id="contrasthigh" accesskey="X" onclick="skin_change(\'swap\');return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_change(\'swap\'); return false;}" title="<?php echo JText::_('High contrast'); ?> [X]" /></span>');
-                      <?php if('yes' == $this->params->get('liquid_variant')) { ?>
-                      document.write('<span class="accessibility-text"><?php echo JText::_('LAYOUT'); ?></span>');
-                      document.write('<span class="accessibility-icon"><input type="button" name="liquid" id="layouttext" accesskey="L" onclick="skin_set_variant(\'liquid\'); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_set_variant(\'liquid\'); return false;}" title="<?php echo JText::_('SET VARIABLE WIDTH'); ?> [L]" /></span>');
-                      <?php } ?>
-                      document.write('<span class="accessibility-text"><?php echo JText::_('reset'); ?></span>');
-                      document.write('<span class="accessibility-icon"><input type="button" name="reset" id="reset" accesskey="Z" onclick="skin_change(\'<?php echo $this->params->get('default_skin'); ?>\'); skin_set_variant(\'\'); fs_set(fs_default); return false;" onkeypress="if(event.keyCode && event.keyCode != 9){skin_change(\'<?php echo $this->params->get('default_skin'); ?>\'); skin_set_variant(\'\'); fs_set(fs_default);return false;}" title="<?php echo JText::_('Revert styles to default'); ?> [Z]" /></span>');
-                    //]]>
-				</script>
-				<noscript><h2><?php echo JText::_('NOSCRIPT'); ?></h2></noscript>
+                <form id="accessibility-form" method="post" action="">
+                    <div>
+                        <span class="accessibility-text"><?php echo JText::_('FAP_FONTSIZE'); ?></span>
+                        <span class="accessibility-icon"><button type="submit" name="fap_font_size" value="decrease" id="decrease" accesskey="D" onclick="fs_change(-1); return false;" onkeypress="return handle_keypress(function(){fs_change(-1);});" title="<?php echo JText::_('FAP_DECREASE_SIZE'); ?> [D]"></button></span>
+                        <span class="accessibility-icon"><button type="submit" name="fap_font_size" value="increase" id="increase" accesskey="A" onclick="fs_change(1); return false;" onkeypress="return handle_keypress(function(){fs_change(1);});" title="<?php echo JText::_('FAP_INCREASE_SIZE'); ?> [A]" ></button></span>
+                        <span class="accessibility-text"><?php echo JText::_('FAP_CONTRAST'); ?></span>
+                        <span class="accessibility-icon"><button type="submit" name="fap_skin" value="contrasthigh" id="contrasthigh" accesskey="X" onclick="skin_change('swap'); return false;" onkeypress="return handle_keypress(function(){skin_change('swap');});" title="<?php echo JText::_('FAP_HIGH_CONTRAST'); ?> [X]"></button></span>
+                        <?php if('yes' == $this->params->get('liquid_variant')) { ?>
+                        <span class="accessibility-text"><?php echo JText::_('FAP_LAYOUT'); ?></span>
+                        <span class="accessibility-icon"><button type="submit" name="fap_skin" value="liquid" id="layouttext" accesskey="L" onclick="skin_set_variant('liquid'); return false;" onkeypress="return handle_keypress(function(){skin_set_variant('liquid');});" title="<?php echo JText::_('FAP_SET_VARIABLE_WIDTH'); ?> [L]" ></button></span>
+                        <?php } ?>
+                        <span class="accessibility-text"><?php echo JText::_('FAP_reset'); ?></span>
+                        <span class="accessibility-icon"><button type="submit" name="fap_skin" value="reset" id="reset" accesskey="Z" onclick="skin_change('<?php echo $this->params->get('default_skin'); ?>'); skin_set_variant(''); fs_set(fs_default); return false;" onkeypress="return handle_keypress(function(){skin_change(\'<?php echo $this->params->get('default_skin'); ?>'); skin_set_variant(''); fs_set(fs_default);});" title="<?php echo JText::_('FAP_REVERT_STYLES_TO_DEFAULT'); ?> [Z]"></button></span>
+                    </div>
+                </form>
             </div>
             <?php } ?>
           </div>

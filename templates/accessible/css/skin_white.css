@@ -56,6 +56,9 @@ body.white .menu a:visited {
     color: #014A9E;
 }
 
+body.white .menu a:hover {
+    background-color:  #EEEEFF;
+}
 
 body.white .menu li.current a {
     background-color: #EEEEFF;
@@ -136,13 +139,6 @@ body.white div.pagenav {
 
 /* tags */
 
-body.white .poll-title {
-	color: black;
-	background: #EBEAD6;
-	font-weight: bold;
-	margin:0;
-}
-
 body.white div.tool-tip {
 	background: #FFF98C;
 	color: black;
@@ -176,11 +172,11 @@ body.white form.editor a:hover
 	color: black;
 }
 
-body.white div#accessibility-links  span.accessibility-icon input,
+body.white div#accessibility-links  span.accessibility-icon button,
 body.white div#accessibility-links  span.accessibility-icon {
     background-color: #002C74;
 }
-body.white div#accessibility-links  span.accessibility-icon input:hover {
+body.white div#accessibility-links  span.accessibility-icon button:hover {
     background-color: #0037AE;
 }
 

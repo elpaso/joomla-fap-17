@@ -1,11 +1,4 @@
-/** Main blocks and floats */
-
-body#mainbody {
-    text-align: center;
-    margin: 0;
-    /* to avoid margins */
-  }
-
+/* General layout rules */
 
 body div#wrapper {
     min-width: 760px;
@@ -46,11 +39,11 @@ div#sidebar-left {
     overflow: hidden;
   }
 
-div.moduletable-banner {
+UNUSEDdiv.moduletable-banner {
   overflow: hidden;
 }
 
-div.moduletable-banner a img{
+UNUSEDdiv.moduletable-banner a img{
   display:block;
   margin-left: auto;
   margin-right: auto;
@@ -60,7 +53,7 @@ div#sidebar-left div.padding {
     padding-left: 0;
   }
 
-div#sidebar-left div.padding form {
+UNUSEDdiv#sidebar-left div.padding form {
     margin-left: 1em;
   }
 
@@ -98,24 +91,6 @@ div#main-3 {
     overflow: hidden;
   }
 
-
-div#user12
-, div.userfull {
-    float: left;
-    width: 100%;
-  }
-
-div.column_left {
-    float: left;
-    width: 49%;
-  }
-
-div.column_right {
-    float: right;
-    width: 49%;
-  }
-
-
 div#accessibility-links {
     text-align:right;
   }
@@ -134,36 +109,11 @@ div#banner .padding {
   }
 
 
-div.article_column {
-    float: left;
-    overflow: hidden;
-  }
-
-
-div.column_separator .contentpaneopen {
-    padding-left: 4%;
-  }
-
 
 div.blog {
     width: 100%;
   }
 
-iframe {
-	text-align:left;
-}
-
-/* from 1.7 */
-table.weblinks, table.category {
-    font-size: 1em;
-    margin: 0.25em 0.5em 0.5em 0;
-    width: 99%;
-}
-
-table.weblinks td, table.category td {
-    padding: 0.45em;
-}
-/* ++++++++++++++  blog  ++++++++++++++ */
 
 .cols-1
 {
@@ -230,10 +180,4 @@ table.weblinks td, table.category td {
 {
         width:30%
 }
-
-.blog-more
-{
-        padding:10px 5px
-}
-
 

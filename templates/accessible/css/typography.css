@@ -172,7 +172,10 @@ div.blog_more {
     list-style-type: none;
 }
 
-div#accessibility-links input{
+
+/* accessibility bar */
+
+div#accessibility-links button{
     border: solid 1px gray;
     background-color: white;
     color: black;
@@ -180,13 +183,13 @@ div#accessibility-links input{
     margin-left: 1em;
 }
 
-div#accessibility-links input:hover{
+div#accessibility-links button:hover{
     cursor: pointer;
     color: white;
     background-color: black;
 }
 
-div#accessibility-links span.accessibility-icon input{
+div#accessibility-links span.accessibility-icon button {
     border: 0 none;
     height: 17px;
     width: 17px;
@@ -338,13 +341,6 @@ div.column_separator .yvComment {
 	margin-bottom: 1em;
 }
 
-div.poll div {
-	padding: 0.2em 1em;
-}
-
-#pollform {
-	margin:1px 0;
-}
 
 /* Forms */
 
@@ -377,12 +373,6 @@ a.category {
 span.description {
     margin-left: 1em;
 }
-/* Fix poll fieldset */
-.poll fieldset {
-    border: none;
-    margin:0;
-    padding:0;
-}
 
 /* Page navigation */
 div.pagination
@@ -408,10 +398,6 @@ div.pagination ul li
     padding: 0 0.4em;
 }
 
-/* The ugly fix */
-legend.poll-title {
-    display:none;
-}
 
 hr.clear {
     clear:both;
@@ -549,22 +535,6 @@ text-decoration:none
 
 #main .cat-children ul li {
     margin: 1em 0;
-}
-
-
-.panel h3.pane-toggler a
-{
-    background-image:url(../images/slider_plus.png);
-    background-position: right  top;
-    background-repeat: no-repeat;
-    border-bottom: 1px solid #DDDDDD;
-}
-
-.panel h3.pane-toggler-down a {
-    background-image: url("../images/slider_minus.png");
-    background-position: right  top;
-    background-repeat: no-repeat;
-    border-bottom: 1px solid #DDDDDD;
 }
 
 
