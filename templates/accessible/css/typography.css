@@ -175,13 +175,18 @@ div.blog_more {
 
 /* accessibility bar */
 
-div#accessibility-links button{
+div#accessibility-links button {
     border: solid 1px gray;
     background-color: white;
     color: black;
     font-weight: bold;
     margin-left: 1em;
 }
+
+div#accessibility-links button span {
+    display: none;
+}
+
 
 div#accessibility-links button:hover{
     cursor: pointer;
