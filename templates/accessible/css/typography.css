@@ -332,7 +332,8 @@ div#menu-top ul.menu {
     border: none;
 }
 
-#banner a:hover {
+#banner a:hover
+, ul.actions li a:hover {
     background: inherit;
 }
 
