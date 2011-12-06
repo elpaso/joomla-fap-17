@@ -9,6 +9,18 @@ body.white a {
     color: #0A2469;
 }
 
+body.white h1 a
+, body.white h2 a
+, body.white h3 a {
+    color:#903;
+    border-bottom: none;
+}
+
+body.white a:hover {
+    background: #903;
+    color: white;
+}
+
 body.white h1
 ,body.white h2 {
     color:#903;
@@ -113,6 +125,7 @@ body.white div.componentheading {
 body.white .readmore a {
     color: #903;
     font-weight: bold;
+    border-bottom: dotted 1px #903;
 }
 
 body.white .readmore a:hover

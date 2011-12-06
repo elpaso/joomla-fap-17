@@ -167,7 +167,7 @@ div.blog {
 .column-2,
 .column-3
 {
-        padding:10px 5px
+        /* Troppo padding in HP: padding:10px 5px*/
 }
 
 .column-2

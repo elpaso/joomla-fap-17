@@ -125,6 +125,7 @@ div#footer{
 	clear:both;
 	margin-top:3px;
 	text-align:center;
+    line-height: 2em;
 }
 
 div#footer .padding{
@@ -232,6 +233,10 @@ span.accessibility-icon #layoutnormal { background-image: url('../images/layoutn
 }
 
 /* Search */
+.moduletable div.search {
+    padding: 0.5em 0 0.5em 0.5em;
+}
+
 #mod_search_searchword {
     width: 140px;
     font-size:inherit;
@@ -263,8 +268,6 @@ form#searchForm, form#searchForm label,  form#searchForm input {
 }
 
 form#searchForm div {
-	margin-top: 1em;
-	margin-bottom: 1em;
 }
 
 div.contentpaneopen ul, div.contentpaneopen ul {
@@ -325,6 +328,14 @@ div#menu-top ul.menu {
 	margin-bottom: 4px;
 }
 
+#banner a {
+    border: none;
+}
+
+#banner a:hover {
+    background: inherit;
+}
+
 /** Titles and so */
 .contentheading h1 {
 	font-weight:bold;
@@ -354,9 +365,9 @@ fieldset {
 }
 
 legend {
-	padding: 1em;
+    padding: 0 1em;
 	font-weight: bold;
- font-size: 110%;
+     font-size: 110%;
 }
 
 a img {
@@ -413,10 +424,12 @@ hr.clear {
 /* from 1.7 */
 table.weblinks, table.category {
     font-size: 1em;
+    width: 100%;
 }
 
-table.weblinks th, table.category th {
-    padding: 7px;
+table.weblinks th, table.category th
+, table.weblinks td, table.category td {
+    padding: 0.4em;
     text-align: left;
 }
 
@@ -431,10 +444,18 @@ table {
     padding: 0;
 }
 
+
+#main .categories-list .category-desc  {
+    margin: 1em 0;
+}
+
 #main .categories-list ul {
+    /* Disabled: gimme back some blank!
     list-style-type: none;
     margin: 0;
     padding: 0;
+    */
+    padding: 0.5em 1.5em;
 }
 
 #main .categories-list ul ul {

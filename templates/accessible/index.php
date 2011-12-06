@@ -102,6 +102,9 @@ if($fap_font_size_request = JRequest::getVar('fap_font_size')){
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/general.css" type="text/css" />
 <link href="<?php echo JURI::base();?>templates/<?php echo $this->template; ?>/css/template_css.css" rel="stylesheet" type="text/css"/>
+<?php if (file_exists(dirname(__FILE__).'/css/custom_theme.css')) { ?>
+    <link href="<?php echo JURI::base();?>templates/<?php echo $this->template; ?>/css/custom_theme.css" rel="stylesheet" type="text/css"/>
+<?php } ?>
 <!--[if IE]>
 <link href="<?php echo JURI::base();?>templates/<?php echo $this->template; ?>/css/msie6.css" rel="stylesheet" type="text/css"/>
 <![endif]-->
@@ -125,7 +128,7 @@ if($fap_font_size = $session->get('fap_font_size')){ ?>
 <?php } ?>
 <script type="text/javascript" src="<?php echo JURI::base();?>templates/<?php echo $this->template;?>/js/skin_alter.js"></script>
 </head>
-<body class="<?php echo ($fap_skin_current ? $fap_skin_current : $this->params->get('default_skin')); ?>" id="main">
+<body class="<?php echo ($fap_skin_current ? $fap_skin_current : $this->params->get('default_skin').($this->params->get('default_variant') ? ' ' . $this->params->get('default_variant') : ''));?>" id="main">
 	<div class="hidden">
 		<a name="up" id="up"></a>
 		<h1><?php echo $this->description; ?></h1>
@@ -151,8 +154,8 @@ if($fap_font_size = $session->get('fap_font_size')){ ?>
                 <form id="fap_skin" method="post" action="">
                     <div>
                         <?php echo JText::_('FAP_FONTSIZE'); ?>
-                        <button type="button" name="fap_font_size" value="decrease" id="decrease" accesskey="D" onclick="fs_change(-1); return false;" onkeypress="return handle_keypress(function(){fs_change(-1);});" title="<?php echo JText::_('FAP_DECREASE_SIZE'); ?> [D]"><?php echo JText::_('FAP_SMALLER'); ?>A -</button>
-                        <button type="button"  name="fap_font_size" value="increase" id="increase" accesskey="A" onclick="fs_change(1); return false;" onkeypress="return handle_keypress(function(){fs_change(1);});" title="<?php echo JText::_('FAP_INCREASE_SIZE'); ?> [A]"><?php echo JText::_('FAP_BIGGER'); ?>A +</button>
+                        <button type="button" name="fap_font_size" value="decrease" id="decrease" accesskey="D" onclick="fs_change(-1); return false;" onkeypress="return handle_keypress(function(){fs_change(-1);});" title="<?php echo JText::_('FAP_DECREASE_SIZE'); ?> [D]"><?php echo JText::_('FAP_SMALLER'); ?></button>
+                        <button type="button"  name="fap_font_size" value="increase" id="increase" accesskey="A" onclick="fs_change(1); return false;" onkeypress="return handle_keypress(function(){fs_change(1);});" title="<?php echo JText::_('FAP_INCREASE_SIZE'); ?> [A]"><?php echo JText::_('FAP_BIGGER'); ?></button>
                         <button type="button" name="fap_skin" value="contrasthigh" id="contrasthigh" accesskey="X" onclick="skin_change('swap');return false;" onkeypress="return handle_keypress(function(){skin_change('swap');});" title="<?php echo JText::_('FAP_HIGH_CONTRAST'); ?> [X]"><?php echo JText::_('FAP_CONTRAST'); ?></button>
                         <?php if('yes' == $this->params->get('liquid_variant')) { ?>
                         <button type="button" name="fap_skin" value="liquid" id="liquid" accesskey="L" onclick="skin_set_variant('liquid'); return false;" onkeypress="return handle_keypress(function(){skin_set_variant('liquid');});" title="<?php echo JText::_('FAP_SET_VARIABLE_WIDTH'); ?> [L]"><?php echo JText::_('FAP_VARIABLE_WIDTH'); ?></button>

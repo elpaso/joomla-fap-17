@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install type="component" version="1.6.0" method="upgrade">
     <name>AccessKeys</name>
-    <creationDate>2011-10-26</creationDate>
+    <creationDate>2011-12-06</creationDate>
     <author>Alessandro Pasotti - ItOpen</author>
     <authorUrl>http://www.itopen.it</authorUrl>
     <copyright>Copyright 2008 ItOpen</copyright>
     <license>GNU/AGPL</license>
-    <version>17_1</version>
+    <version>17_4_sbappto</version>
     <description>
         <![CDATA[
                  Componente per le accesskey

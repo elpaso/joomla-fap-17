@@ -2,8 +2,8 @@
 <!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
 <extension version="1.7" type="template" client="site">
 	<name>accessible</name>
-	<version>17_1</version>
-	<creationDate>2011-10-26</creationDate>
+	<version>17_4_sbappto</version>
+	<creationDate>2011-12-06</creationDate>
 	<author>Alessandro Pasotti - ItOpen</author>
 	<authorEmail>info@itopen.it</authorEmail>
 	<authorUrl>http://www.itopen.it</authorUrl>
@@ -37,8 +37,12 @@
                 <option value="yes">Yes</option>
                 </field>
                 <field name="accessibility_icons" type="radio" default="yes" label="Display accessibility icons instead of buttons">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </field>
+                <field name="default_variant" type="list" default="" label="Start with the template variant">
+                    <option value="">None</option>
+                    <option value="liquid">Liquid</option>
                 </field>
             </fieldset>
         </fields>
