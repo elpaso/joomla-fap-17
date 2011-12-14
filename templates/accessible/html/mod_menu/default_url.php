@@ -28,11 +28,12 @@ defined('_JEXEC') or die;
 
 require_once dirname(__FILE__) . DS. "accesskey_helper.php";
 $accesskeys = AccesskeyHelper::getAccessKeys();
-$titles     = AccesskeyHelper::getTitles();
+$ak_titles     = AccesskeyHelper::getTitles();
 
 // Note. It is important to remove spaces between elements.
 $class = $item->anchor_css ? 'class="external-link '.$item->anchor_css.'" ' : 'class="external-link" ';
-$title = $item->anchor_title ? 'title="'.$item->anchor_title.'" ' : '';
+$title = @$ak_titles[$item->id] ? 'title="'.$ak_titles[$item->id].'" ' : '';
+
 if ($item->menu_image) {
         $item->params->get('menu_text', 1 ) ?
         $linktype = '<img src="'.$item->menu_image.'" alt="'.$item->title.'" /><span class="image-title">'.$item->title.'</span> ' :
@@ -44,14 +45,14 @@ else { $linktype = $item->title;
 switch ($item->browserNav) :
     default:
     case 0:
-?><a<?php if(@$titles[$item->id]){ echo ' title="' . htmlentities($titles[$item->id]) . '"'; } ?><?php if(@$accesskeys[$item->id]){
+?><a<?php if(@$accesskeys[$item->id]){
         echo " accesskey='{$accesskeys[$item->id]}'";
     } ?> <?php echo $class; ?>href="<?php echo htmlentities($item->flink); ?>" <?php echo $title; ?>><?php echo $linktype; ?></a><?php
         break;
     case 2:// window.open
     case 1:
         // _blank
-?><a<?php if(@$titles[$item->id]){ echo ' title="' . htmlentities($titles[$item->id]) . '"';} ?><?php if(@$accesskeys[$item->id]){
+?><a<?php if(@$accesskeys[$item->id]){
     echo " accesskey='{$accesskeys[$item->id]}'";
     } ?> <?php echo $class; ?>href="<?php echo htmlentities($item->flink); ?>" target="_blank" <?php echo $title; ?>><?php echo $linktype; ?></a><?php
         break;
