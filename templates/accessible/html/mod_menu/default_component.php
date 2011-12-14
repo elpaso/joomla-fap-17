@@ -38,7 +38,8 @@ if ($item->menu_image) {
         $linktype = '<img src="'.$item->menu_image.'" alt="'.$item->title.'" /><span class="image-title">'.$item->title.'</span> ' :
         $linktype = '<img src="'.$item->menu_image.'" alt="'.$item->title.'" />';
 }
-else { $linktype = $item->title;
+else {
+    $linktype = $item->title;
 }
 
 switch ($item->browserNav) :
